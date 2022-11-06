@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "simple_gatt_service.h": "c",
+        "sys_init.h": "c",
+        "sys_utils.h": "c",
+        "stdlib.h": "c",
+        "comm_interface.h": "c",
+        "string.h": "c",
+        "driver_system.h": "c"
+    }
+}
