@@ -30,7 +30,8 @@ SRC_FILES += \
               $(SDK_ROOT)/components/modules/platform/source/app_boot_vectors.c \
               $(SDK_ROOT)/components/modules/patch/patch.c \
               $(USER_DIR)/init/app_init.c \
-              $(USER_DIR)/common/comm_interface.c 
+              $(USER_DIR)/common/comm_interface.c \
+              $(USER_DIR)/app_task/task_time_slice.c 
 
 # Include folders common to all targets
 INC_FOLDERS += \
@@ -47,7 +48,8 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/ble/profiles/ble_simple_profile \
   $(PROJ_DIR) \
   $(USER_DIR)/init \
-  $(USER_DIR)/common 
+  $(USER_DIR)/common \
+  $(USER_DIR)/app_task
 
 
 # Libraries common to all targets

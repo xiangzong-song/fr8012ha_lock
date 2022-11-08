@@ -1,6 +1,7 @@
 #ifndef _COMM_INTERFACE_H_
 #define _COMM_INTERFACE_H_
 #include "co_printf.h"
+#include <stdbool.h>
 
 #define COMM_ASSERT(x) \
     if ((x) == true)\

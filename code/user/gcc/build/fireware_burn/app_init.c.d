@@ -44,7 +44,8 @@ build/fireware_burn/app_init.c.o: ..//init/app_init.c \
  ../..//components/driver/include/driver_iomux.h ../system/user_task.h \
  ../system/ble_simple_peripheral.h ..//common/comm_interface.h \
  ../..//components/modules/os/include/os_mem.h \
- ../..//components/modules/platform/include/compiler.h
+ ../..//components/modules/platform/include/compiler.h \
+ ..//app_task/task_time_slice.h
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/stdio.h:
 
@@ -143,3 +144,5 @@ build/fireware_burn/app_init.c.o: ..//init/app_init.c \
 ../..//components/modules/os/include/os_mem.h:
 
 ../..//components/modules/platform/include/compiler.h:
+
+..//app_task/task_time_slice.h:
