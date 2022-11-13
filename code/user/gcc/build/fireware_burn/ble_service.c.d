@@ -1,4 +1,6 @@
-build/fireware_burn/app_init.c.o: ..//init/app_init.c \
+build/fireware_burn/ble_service.c.o: ..//ble_related/ble_service.c \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdbool.h \
+ ../..//components/ble/include/gap/gap_api.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/stdio.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/_ansi.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/newlib.h \
@@ -27,28 +29,25 @@ build/fireware_burn/app_init.c.o: ..//init/app_init.c \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_pthreadtypes.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/types.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/stdio.h \
- /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/string.h \
- /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_locale.h \
- /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/string.h \
- ../..//components/modules/common/include/co_printf.h \
- ../..//components/ble/include/gap/gap_api.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdint.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/stdint.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_intsup.h \
- /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdbool.h \
  ../..//components/ble/include/gatt/gatt_api.h \
- ../..//components/modules/os/include/os_msg_q.h ..//init/app_init.h \
- ../..//components/modules/os/include/os_task.h \
  ../..//components/modules/os/include/os_msg_q.h \
- ../..//components/driver/include/driver_system.h \
- ../..//components/driver/include/driver_iomux.h ../system/user_task.h \
- ../system/ble_simple_peripheral.h ..//common/others/app_common.h \
- ../..//components/modules/os/include/os_mem.h \
+ ../..//components/ble/profiles/ble_simple_profile/simple_gatt_service.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/string.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_locale.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/string.h \
+ ../..//components/ble/include/gatt/gatt_sig_uuid.h \
+ ../..//components/modules/sys/include/sys_utils.h \
+ ../..//components/modules/common/include/co_printf.h \
  ../..//components/modules/platform/include/compiler.h \
- /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/time.h \
- /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/time.h \
- ..//task/app_task.h ..//common/ring_buffer/ring_buffer.h \
- ..//ble_related/ble_service.h ..//ble_related/ble_protocol.h
+ ../system/flash_usage_config.h ..//common/ring_buffer/ring_buffer.h \
+ ..//common/others/app_common.h
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdbool.h:
+
+../..//components/ble/include/gap/gap_api.h:
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/stdio.h:
 
@@ -106,56 +105,34 @@ build/fireware_burn/app_init.c.o: ..//init/app_init.c \
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/stdio.h:
 
-/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/string.h:
-
-/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_locale.h:
-
-/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/string.h:
-
-../..//components/modules/common/include/co_printf.h:
-
-../..//components/ble/include/gap/gap_api.h:
-
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdint.h:
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/stdint.h:
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_intsup.h:
 
-/usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdbool.h:
-
 ../..//components/ble/include/gatt/gatt_api.h:
 
 ../..//components/modules/os/include/os_msg_q.h:
 
-..//init/app_init.h:
+../..//components/ble/profiles/ble_simple_profile/simple_gatt_service.h:
 
-../..//components/modules/os/include/os_task.h:
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/string.h:
 
-../..//components/modules/os/include/os_msg_q.h:
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_locale.h:
 
-../..//components/driver/include/driver_system.h:
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/string.h:
 
-../..//components/driver/include/driver_iomux.h:
+../..//components/ble/include/gatt/gatt_sig_uuid.h:
 
-../system/user_task.h:
+../..//components/modules/sys/include/sys_utils.h:
 
-../system/ble_simple_peripheral.h:
-
-..//common/others/app_common.h:
-
-../..//components/modules/os/include/os_mem.h:
+../..//components/modules/common/include/co_printf.h:
 
 ../..//components/modules/platform/include/compiler.h:
 
-/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/time.h:
-
-/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/time.h:
-
-..//task/app_task.h:
+../system/flash_usage_config.h:
 
 ..//common/ring_buffer/ring_buffer.h:
 
-..//ble_related/ble_service.h:
-
-..//ble_related/ble_protocol.h:
+..//common/others/app_common.h:
