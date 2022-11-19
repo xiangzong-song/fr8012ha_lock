@@ -113,7 +113,7 @@ pHandler __isr_vectors[] =
         timer0_isr_ram,
         timer1_isr_ram,
         uart0_isr_ram,
-        uart1_isr,
+        uart1_isr_ram,
         ssp_isr_ram,
         0,
         0,
