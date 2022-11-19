@@ -11,7 +11,6 @@ LINKER_SCRIPT  := ldscript.ld
 # Source files common to all targets
 SRC_FILES += \
               $(PROJ_DIR)/proj_main.c \
-              $(PROJ_DIR)/ble_simple_peripheral.c \
               $(PROJ_DIR)/user_task.c \
               $(SDK_ROOT)/components/modules/button/button.c \
               $(SDK_ROOT)/components/ble/profiles/ble_simple_profile/simple_gatt_service.c \
@@ -35,6 +34,7 @@ SRC_FILES += \
               $(USER_DIR)/common/ring_buffer/ring_buffer.c \
               $(USER_DIR)/ble_related/ble_protocol.c \
               $(USER_DIR)/ble_related/ble_service.c \
+              $(USER_DIR)/uart/uart_protocol.c \
 
 # Include folders common to all targets
 INC_FOLDERS += \
@@ -54,7 +54,8 @@ INC_FOLDERS += \
   $(USER_DIR)/task \
   $(USER_DIR)/common/others \
   $(USER_DIR)/common/ring_buffer \
-  $(USER_DIR)/ble_related
+  $(USER_DIR)/ble_related \
+  $(USER_DIR)/uart \
 
 
 # Libraries common to all targets

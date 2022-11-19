@@ -4,11 +4,11 @@
 #include "os_mem.h"
 #include "app_common.h"
 
-#define LOG_TAG "R_B"
+#define LOG_TAG "ring_buff"
 
 ring_buffer_t* ring_buffer_init(uint32_t size)
 {
-    ring_buffer_t *ring_buffer;
+    ring_buffer_t *ring_buffer = NULL;
 
     ring_buffer = (ring_buffer_t*)os_malloc(sizeof(ring_buffer_t));
     ring_buffer->buffer = os_malloc(size);
@@ -101,7 +101,7 @@ __attribute__((section("ram_code"))) void ring_buffer_write(ring_buffer_t* ring_
     }
 }
 
-__attribute__((section("ram_code"))) void ring_buffer_read(ring_buffer_t* ring_buffer, uint8_t *read_data, uint32_t read_size)
+__attribute__((section("ram_code"))) void ring_buffer_read(ring_buffer_t* ring_buffer, uint8_t *read_data, uint32_t read_size, uint8_t update_idx)
 {
     uint32_t valid_size = 0;
     uint32_t end_left = 0;
@@ -133,13 +133,24 @@ __attribute__((section("ram_code"))) void ring_buffer_read(ring_buffer_t* ring_b
     if (size_first)
     {
         memcpy(read_data, ring_buffer->buffer + ring_buffer->read_idx, size_first);
-        ring_buffer->read_idx += size_first;
+        if (update_idx)
+        {
+            ring_buffer->read_idx += size_first;
+        }
     }
     
     if(size_left)
     {
         memcpy(read_data + size_first, ring_buffer->buffer, size_left);
-        ring_buffer->read_idx = size_left;
+        if (update_idx)
+        {
+            ring_buffer->read_idx = size_left;
+        }
     }
+}
+
+__attribute__((section("ram_code"))) void ring_buffer_update_read_idx(ring_buffer_t* ring_buffer, uint8_t increase_value)
+{
+    ring_buffer->read_idx = (ring_buffer->read_idx + increase_value) % ring_buffer->size;
 }
 

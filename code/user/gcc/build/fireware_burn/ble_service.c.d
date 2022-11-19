@@ -43,7 +43,7 @@ build/fireware_burn/ble_service.c.o: ..//ble_related/ble_service.c \
  ../..//components/modules/common/include/co_printf.h \
  ../..//components/modules/platform/include/compiler.h \
  ../system/flash_usage_config.h ..//common/ring_buffer/ring_buffer.h \
- ..//common/others/app_common.h
+ ..//common/others/app_common.h ..//ble_related/ble_protocol.h
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdbool.h:
 
@@ -136,3 +136,5 @@ build/fireware_burn/ble_service.c.o: ..//ble_related/ble_service.c \
 ..//common/ring_buffer/ring_buffer.h:
 
 ..//common/others/app_common.h:
+
+..//ble_related/ble_protocol.h:

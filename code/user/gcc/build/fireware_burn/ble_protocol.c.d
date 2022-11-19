@@ -10,7 +10,8 @@ build/fireware_burn/ble_protocol.c.o: ..//ble_related/ble_protocol.c \
  ../..//components/modules/common/include/co_printf.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdbool.h \
  ..//ble_related/ble_protocol.h ..//common/ring_buffer/ring_buffer.h \
- ..//ble_related/ble_service.h ..//task/app_task.h
+ ..//ble_related/ble_service.h ..//task/app_task.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stddef.h
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdint.h:
 
@@ -39,3 +40,5 @@ build/fireware_burn/ble_protocol.c.o: ..//ble_related/ble_protocol.c \
 ..//ble_related/ble_service.h:
 
 ..//task/app_task.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stddef.h:

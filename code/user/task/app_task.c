@@ -5,7 +5,7 @@
 #include "co_printf.h"
 #include "app_common.h"
 
-#define LOG_TAG "A_T"
+#define LOG_TAG "app_task"
 
 task_t *task_head = NULL;
 uint32_t task_id = 0;

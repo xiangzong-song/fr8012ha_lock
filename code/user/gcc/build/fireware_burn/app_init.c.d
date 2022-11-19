@@ -42,13 +42,14 @@ build/fireware_burn/app_init.c.o: ..//init/app_init.c \
  ../..//components/modules/os/include/os_msg_q.h \
  ../..//components/driver/include/driver_system.h \
  ../..//components/driver/include/driver_iomux.h ../system/user_task.h \
- ../system/ble_simple_peripheral.h ..//common/others/app_common.h \
+ ..//common/others/app_common.h \
  ../..//components/modules/os/include/os_mem.h \
  ../..//components/modules/platform/include/compiler.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/time.h \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/time.h \
  ..//task/app_task.h ..//common/ring_buffer/ring_buffer.h \
- ..//ble_related/ble_service.h ..//ble_related/ble_protocol.h
+ ..//ble_related/ble_service.h ..//ble_related/ble_protocol.h \
+ ..//uart/uart_protocol.h
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/stdio.h:
 
@@ -140,8 +141,6 @@ build/fireware_burn/app_init.c.o: ..//init/app_init.c \
 
 ../system/user_task.h:
 
-../system/ble_simple_peripheral.h:
-
 ..//common/others/app_common.h:
 
 ../..//components/modules/os/include/os_mem.h:
@@ -159,3 +158,5 @@ build/fireware_burn/app_init.c.o: ..//init/app_init.c \
 ..//ble_related/ble_service.h:
 
 ..//ble_related/ble_protocol.h:
+
+..//uart/uart_protocol.h:

@@ -64,7 +64,7 @@ build/fireware_burn/proj_main.c.o: ../system/proj_main.c \
  ../..//components/driver/include/driver_rtc.h \
  ../..//components/driver/include/driver_flash.h \
  ../..//components/driver/include/driver_efuse.h \
- ../system/flash_usage_config.h ../system/ble_simple_peripheral.h \
+ ../system/flash_usage_config.h \
  ../..//components/ble/profiles/ble_simple_profile/simple_gatt_service.h \
  ../..//components/ble/include/gatt/gatt_sig_uuid.h ..//init/app_init.h
 
@@ -201,8 +201,6 @@ build/fireware_burn/proj_main.c.o: ../system/proj_main.c \
 ../..//components/driver/include/driver_efuse.h:
 
 ../system/flash_usage_config.h:
-
-../system/ble_simple_peripheral.h:
 
 ../..//components/ble/profiles/ble_simple_profile/simple_gatt_service.h:
 

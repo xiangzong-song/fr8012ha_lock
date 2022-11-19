@@ -21,7 +21,6 @@
 #include "driver_flash.h"
 #include "driver_efuse.h"
 #include "flash_usage_config.h"
-#include "ble_simple_peripheral.h"
 #include "simple_gatt_service.h"
 #include "app_init.h"
 /*

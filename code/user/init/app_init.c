@@ -7,7 +7,6 @@
 #include "os_task.h"
 #include "driver_system.h"
 #include "user_task.h"
-#include "ble_simple_peripheral.h"
 #include "app_common.h"
 #include "os_mem.h"
 #include "time.h"
@@ -15,8 +14,9 @@
 #include "ring_buffer.h"
 #include "ble_service.h"
 #include "ble_protocol.h"
+#include "uart_protocol.h"
 
-#define LOG_TAG "A_I"
+#define LOG_TAG "app_init"
 
 void task_idle(void)
 {
@@ -30,11 +30,11 @@ void app_loop(void)
 
 void app_init(void)
 {
-    APP_COMM_PRINTF("\r\napp init start...\r\n");
+    uart_protocol_init();
 
+    APP_COMM_PRINTF("app init start...\r\n");
     system_sleep_disable();
     user_task_init();
-    // simple_peripheral_init();
     ble_service_init();
     ble_protocol_init();
     system_set_tx_power(RF_TX_POWER_POS_10dBm);

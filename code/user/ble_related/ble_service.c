@@ -6,8 +6,9 @@
 #include "flash_usage_config.h"
 #include "ring_buffer.h"
 #include "app_common.h"
+#include "ble_protocol.h"
 
-#define LOG_TAG "BLE_SERVICE"
+#define LOG_TAG "ble_ser"
 
 #define ADV_DATA_LEN        (27+1)
 #define RESP_DATA_LEN       18
@@ -18,7 +19,6 @@ uint8_t adv_data[ADV_DATA_LEN] = {  0x11, 0x09, 't', 'e', 's', 't', '_', '_', 'h
 uint8_t adv_resp[RESP_DATA_LEN] = {0x11, 0x09, 't', 'e', 's', 't', '_', '_', 'h', '9', '9', '9', '9', '_', '0', '0', '0', '0'};
 uint8_t dev_name[ADV_NAME_LEN] = {'t', 'e', 's', 't', '_', '_', 'h', '9', '9', '9', '9', '_', '0', '0', '0', '0'};
       
-#define BLE_BUFFER_SIZE                     512
 #define BLE_ADV_BUFFER_LEN                  32
 #define BLE_DEV_BUFFER_LEN                  32
 #define GATT_CHAR1_DESC_LEN                 20
@@ -63,7 +63,6 @@ static uint8_t gatt_service_id = 0;
 static gatt_service_t govee_gatt_service;
 static ble_service_t ble_service;
 static uint8_t adv_status = 0;
-static ring_buffer_t *ble_buffer = NULL;
 static uint8_t phone_link_conidx = 0xff;
 static ble_state_e ble_conn_state = BLE_STATE_DISCONNECT;
 
@@ -268,7 +267,7 @@ static void ble_service_write_callback(uint8_t* write_buf, uint16_t len, uint16_
         return;
     }
 
-    ring_buffer_write(ble_buffer, write_buf, len);
+    ring_buffer_write(ble_protocol_buffer_get(), write_buf, len);
 }
 
 static uint16_t ble_service_msg_handle(gatt_msg_t* p_msg)
@@ -337,11 +336,4 @@ void ble_service_init(void)
     APP_COMM_PRINTF("mac addr[%02x:%02x:%02x:%02x:%02x:%02x]\r\n", addr.addr[0], addr.addr[1], addr.addr[2], addr.addr[3], addr.addr[4], addr.addr[5]);
     
     gatt_service_id = ble_service_add(&govee_gatt_service);
-
-    ble_buffer = ring_buffer_init(BLE_BUFFER_SIZE);
-}
-
-ring_buffer_t* ble_service_buffer_get(void)
-{
-    return ble_buffer;
 }
