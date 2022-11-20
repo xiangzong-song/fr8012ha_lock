@@ -10,14 +10,20 @@
 
 #define LOG_TAG "ble_ser"
 
-#define ADV_DATA_LEN        (27+1)
-#define RESP_DATA_LEN       18
+// #define ADV_DATA_LEN        32
+// #define RESP_DATA_LEN       18
+#define ADV_DATA_SIZE_MAX   31
 #define ADV_NAME_LEN        16
+typedef struct 
+{
+    uint8_t type;
+    uint8_t* data;
+    uint8_t data_size;
+}ad_structure_t;
 
-uint8_t adv_data[ADV_DATA_LEN] = {  0x11, 0x09, 't', 'e', 's', 't', '_', '_', 'h', '9', '9', '9', '9', '_', '0', '0', '0', '0',\
-                                    0x09, 0xff, 0x02, 0x88, 0xec, 0x00, 0x00, 0x00, 0x01, 0x00};
-uint8_t adv_resp[RESP_DATA_LEN] = {0x11, 0x09, 't', 'e', 's', 't', '_', '_', 'h', '9', '9', '9', '9', '_', '0', '0', '0', '0'};
-uint8_t dev_name[ADV_NAME_LEN] = {'t', 'e', 's', 't', '_', '_', 'h', '9', '9', '9', '9', '_', '0', '0', '0', '0'};
+uint8_t adv_data[ADV_DATA_SIZE_MAX] = {0};
+uint8_t adv_resp[ADV_DATA_SIZE_MAX] = {0};
+uint8_t dev_name[ADV_DATA_SIZE_MAX] = {0};
       
 #define BLE_ADV_BUFFER_LEN                  32
 #define BLE_DEV_BUFFER_LEN                  32
@@ -25,9 +31,12 @@ uint8_t dev_name[ADV_NAME_LEN] = {'t', 'e', 's', 't', '_', '_', 'h', '9', '9', '
 #define GATT_CHAR2_DESC_LEN                 20
 #define GATT_CHAR1_VALUE_LEN                300
 #define GATT_CHAR2_VALUE_LEN                300
-#define GATT_SVC1_TX_UUID_128               "\x10\x2B\x0D\x0C\x0B\x0A\x09\x08\x07\x06\x05\x04\x03\x02\x01\x00"
-#define GATT_SVC1_RX_UUID_128               "\x11\x2B\x0D\x0C\x0B\x0A\x09\x08\x07\x06\x05\x04\x03\x02\x01\x00"
-
+// #define GATT_SVC1_TX_UUID_128               "\x10\x2B\x0D\x0C\x0B\x0A\x09\x08\x07\x06\x05\x04\x03\x02\x01\x00"
+// #define GATT_SVC1_RX_UUID_128               "\x11\x2B\x0D\x0C\x0B\x0A\x09\x08\x07\x06\x05\x04\x03\x02\x01\x00"
+#define GATT_SVC1_TX_UUID_128               "\x9E\xCA\xDC\x24\x0E\xE5\xA9\xE0\x93\xF3\xA3\xB5\x02\x00\x41\x6E"
+#define GATT_SVC1_RX_UUID_128               "\x9E\xCA\xDC\x24\x0E\xE5\xA9\xE0\x93\xF3\xA3\xB5\x03\x00\x41\x6E"
+//6E410002-B5A3-F393-E0A9-E50E24DCCA9E
+//6E410003-B5A3-F393-E0A9-E50E24DCCA9E
 typedef enum
 {
     GATT_IDX_SERVICE = 0,
@@ -68,7 +77,9 @@ static ble_state_e ble_conn_state = BLE_STATE_DISCONNECT;
 
 static const uint8_t gatt_char1_desc[GATT_CHAR1_DESC_LEN] = "for gatt Read";
 static const uint8_t gatt_char2_desc[GATT_CHAR2_DESC_LEN] = "for gatt Write";
-static const uint8_t server_uuid[16] = {0x10, 0x19, 0x0D, 0x0C, 0x0B, 0x0A, 0x09, 0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00};
+// static const uint8_t server_uuid[16] = {0x10, 0x19, 0x0D, 0x0C, 0x0B, 0x0A, 0x09, 0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00};
+static const uint8_t server_uuid[16] = {0x9E, 0xCA, 0xDC, 0x24, 0x0E, 0xE5, 0xA9, 0xE0, 0x93, 0xF3, 0xA3, 0xB5, 0x01, 0x00, 0x41, 0x6E};
+//6E410001-B5A3-F393-E0A9-E50E24DCCA9E
 static const gatt_attribute_t gatt_profile_att_table[GATT_IDX_NB] =
 {
     // Simple gatt Service Declaration
@@ -303,9 +314,62 @@ static uint8_t ble_service_add(gatt_service_t* pt_service)
     return gatt_add_service(pt_service);
 }
 
+uint8_t ble_service_write_data(uint8_t* data, uint32_t size)
+{
+    if (data == NULL || size == 0)
+    {
+        APP_COMM_PRINTF("ble_service_write_data fail!\r\n");
+        return 1;
+    }
+
+    gatt_ntf_t ntf_att;
+    ntf_att.att_idx = GATT_IDX_CHAR1_VALUE;
+    ntf_att.conidx = phone_link_conidx;
+    ntf_att.svc_id = gatt_service_id;
+    ntf_att.data_len = size;
+    ntf_att.p_data = data;
+    gatt_notification(ntf_att);
+
+    return 0;
+}
+
+uint8_t ble_adv_append(uint8_t *p_data, ad_structure_t ad_structure)
+{
+    uint8_t idx = 0;
+    uint8_t len = 0;
+    uint8_t append_len = ad_structure.data_size + 1;
+
+    while (idx < ADV_DATA_SIZE_MAX)
+    {
+        len = p_data[idx];
+        if (len == 0)
+        {
+            break;
+        }
+        idx += (len + 1);
+    }
+
+    if (idx + append_len + 1 > ADV_DATA_SIZE_MAX)
+    {
+        APP_COMM_PRINTF("adv len %d > %d\r\n", idx + append_len + 1, ADV_DATA_SIZE_MAX);
+        return idx;
+    }
+
+    p_data[idx++] = append_len;
+    p_data[idx++] = ad_structure.type;
+    memcpy(p_data + idx, ad_structure.data, ad_structure.data_size);
+    idx += ad_structure.data_size;
+
+    return idx;
+}
+
 void ble_service_init(void)
 {
     mac_addr_t addr;
+    ad_structure_t ad_structure;
+    uint8_t adv_data_len = 0;
+    uint8_t adv_resp_len = 0;
+    uint8_t dev_name_len = 0;
 
     gap_security_param_t param =
     {
@@ -318,12 +382,34 @@ void ble_service_init(void)
     };  
     gap_security_param_init(&param);
 
+    gap_address_get(&addr);
+    APP_COMM_PRINTF("mac addr[%02x:%02x:%02x:%02x:%02x:%02x]\r\n", addr.addr[0], addr.addr[1], addr.addr[2], addr.addr[3], addr.addr[4], addr.addr[5]);
+    
+    uint8_t name[] = "Cabinet Lock";
+    ad_structure.type = 0x09;
+    ad_structure.data = name;
+    ad_structure.data_size = sizeof(name) - 1;
+    adv_data_len = ble_adv_append(adv_data, ad_structure);
+    adv_resp_len = ble_adv_append(adv_resp, ad_structure);
+    memcpy(dev_name, name, sizeof(name) - 1);
+    dev_name_len = sizeof(name) - 1;
+
+    uint8_t data[8] = {0};
+    memcpy(data, (void*)&addr, 6);
+    data[6] = 0;
+    data[7] = 0;
+    ad_structure.type = 0xff;
+    ad_structure.data = data;
+    ad_structure.data_size = sizeof(data);
+    adv_data_len = ble_adv_append(adv_data, ad_structure);
+
     ble_service.adv_data = adv_data;
-    ble_service.adv_len = sizeof(adv_data);
+    ble_service.adv_len = adv_data_len;
     ble_service.rsp_data = adv_resp;
-    ble_service.rsp_len = sizeof(adv_resp);
+    ble_service.rsp_len = adv_resp_len;
     ble_service.dev_data = dev_name;
-    ble_service.dev_len = sizeof(dev_name);
+    ble_service.dev_len = dev_name_len;
+
     ble_service.adv_intv = 1600;
 
     gap_set_dev_name(ble_service.dev_data, ble_service.dev_len);
@@ -332,8 +418,5 @@ void ble_service_init(void)
     gap_bond_manager_init(BLE_BONDING_INFO_SAVE_ADDR, BLE_REMOTE_SERVICE_SAVE_ADDR, 8, true);
     gap_bond_manager_delete_all();
 
-    gap_address_get(&addr);
-    APP_COMM_PRINTF("mac addr[%02x:%02x:%02x:%02x:%02x:%02x]\r\n", addr.addr[0], addr.addr[1], addr.addr[2], addr.addr[3], addr.addr[4], addr.addr[5]);
-    
     gatt_service_id = ble_service_add(&govee_gatt_service);
 }

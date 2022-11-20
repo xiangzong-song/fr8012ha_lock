@@ -11,7 +11,20 @@ build/fireware_burn/ble_protocol.c.o: ..//ble_related/ble_protocol.c \
  /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdbool.h \
  ..//ble_related/ble_protocol.h ..//common/ring_buffer/ring_buffer.h \
  ..//ble_related/ble_service.h ..//task/app_task.h \
- /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stddef.h
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stddef.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/string.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/_ansi.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/newlib.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/config.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/ieeefp.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/reent.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/_ansi.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_types.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/_types.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/lock.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/cdefs.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_locale.h \
+ /usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/string.h
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stdint.h:
 
@@ -42,3 +55,29 @@ build/fireware_burn/ble_protocol.c.o: ..//ble_related/ble_protocol.c \
 ..//task/app_task.h:
 
 /usr/local/gcc-arm-none-eabi-6-2016-q4-update/lib/gcc/arm-none-eabi/6.2.1/include/stddef.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/string.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/_ansi.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/newlib.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/config.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/ieeefp.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/reent.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/_ansi.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_types.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/machine/_types.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/lock.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/cdefs.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/_locale.h:
+
+/usr/local/gcc-arm-none-eabi-6-2016-q4-update/arm-none-eabi/include/sys/string.h:
